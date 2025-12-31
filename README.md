@@ -3,3 +3,4 @@ Estimation of intensity function of Spatial-temporal point process with generati
 
 ## This is Git repository related to my thesis
 Dataset = Japan earthquake dataset from 1996 - 2025
+Methods = GANs and VAEs
