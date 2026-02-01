@@ -12,3 +12,7 @@ from scipy import stats
 from scipy.spatial import distance
 from sklearn.preprocessing import MinMaxScaler
 import matplotlib.pyplot as plt
+
+# Reading dataset
+data = pd.read_csv(data.csv)
+
