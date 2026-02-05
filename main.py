@@ -20,6 +20,7 @@ data = pd.read_csv(data.csv)
 # 1. Data Preprocessing
 # ===========================
 
+# Define Data processing class
 class STPPDataPreprocessor:
     def __init__(self, data_path):
         self.data = pd.read_csv(data_path)
