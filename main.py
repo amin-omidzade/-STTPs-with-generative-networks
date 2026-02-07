@@ -13,8 +13,9 @@ from scipy.spatial import distance
 from sklearn.preprocessing import MinMaxScaler
 import matplotlib.pyplot as plt
 
-# Reading dataset
-data = pd.read_csv(data.csv)
+# Reading raw data
+# Then data gathering to single datast
+# data = pd.read_csv(data.csv) # Must be changed
 
 # ===========================
 # 1. Data Preprocessing
