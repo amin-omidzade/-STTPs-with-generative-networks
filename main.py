@@ -37,8 +37,8 @@ class STPPDataPreprocessor:
             xmin, xmax, ymin, ymax = spatial_bounds
             cleaned = cleaned[
                 (cleaned['longitude'] >= xmin) & (cleaned['longitude'] <= xmax) &
-                (cleaned['latitude'] >= ymin) & (cleaned['latitude'] <= ymax)
-            ]
+                (cleaned['latitude'] >= ymin) & (cleaned['latitude'] <= ymax)]
+            
         # Remove duplicates
         cleaned = cleaned.drop_duplicates(subset=['time'])
         self.cleaned_data = cleaned.reset_index(drop=True)
@@ -73,4 +73,3 @@ class STPPDataPreprocessor:
         train_data = self.normalized_data[:split_idx]
         test_data = self.normalized_data[split_idx:]
         return train_data, test_data
-
