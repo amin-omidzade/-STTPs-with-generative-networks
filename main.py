@@ -7,11 +7,8 @@ from pathlib import Path
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
-
 import math
 import os
-
-from scipy.spatial import Delaunay
 
 import json
 import warnings
@@ -20,6 +17,7 @@ import random
 from scipy.optimize import minimize
 from scipy.spatial import cKDTree
 from scipy.special import gammaln
+from scipy.spatial import Delaunay
 
 from sklearn.neighbors import NearestNeighbors
 from sklearn.preprocessing import MinMaxScaler
@@ -33,6 +31,7 @@ from shapely import affinity
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, TensorDataset
+
 import matplotlib.pyplot as plt
 
 # Reading raw data
