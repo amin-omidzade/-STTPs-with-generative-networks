@@ -50,15 +50,13 @@ def try_read_csv(path: Path):
     ]:
         try:
             df = pd.read_csv(path, sep=sep, header=0, **kwargs)
-            # اگر از ردیف اول بعنوان header استفاده نشده بود، ستون‌های غیراستاندارد را اصلاح کنیم
             if df.shape[1] < 3:
                 continue
             print(f"خوانده شد با جداکننده: {repr(sep)} — shape: {df.shape}")
             return df
         except Exception as e:
-            # print(f"خواندن با sep={sep} خطا داد: {e}")
             continue
-    raise ValueError(f"نشد فایل را با جداکننده‌های معمول بخوانیم: {path}")
+          raise ValueError(f"نشد فایل را با جداکننده‌های معمول بخوانیم: {path}")
 
 def clean_colnames(df: pd.DataFrame):
     df = df.copy()
