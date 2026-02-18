@@ -33,7 +33,12 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, TensorDataset
 
-# Reading raw data
-# Then data gathering to single datast
-# data = pd.read_csv(data.csv) # Must be changed
+# in and out path
+INPUT_PATH = Path("final_data.csv")
+OUTPUT_PATH = Path("final_data_cleaned.csv")
+
+# User setting
+mag_col = "MAG"              
+min_magnitude = 4.0          
+
 
