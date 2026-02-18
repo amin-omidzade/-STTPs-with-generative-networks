@@ -59,3 +59,13 @@ def try_read_csv(path: Path):
             # print(f"خواندن با sep={sep} خطا داد: {e}")
             continue
     raise ValueError(f"نشد فایل را با جداکننده‌های معمول بخوانیم: {path}")
+
+def clean_colnames(df: pd.DataFrame):
+    df = df.copy()
+    df.columns = [str(c).strip() for c in df.columns]
+    return df
+
+def replace_na_strings(df: pd.DataFrame):
+    df = df.copy()
+    df = df.replace(["NaN", "nan", "NAN", "", "NULL", "null"], np.nan)
+    return df
