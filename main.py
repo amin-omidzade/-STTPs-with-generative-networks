@@ -69,8 +69,6 @@ def replace_na_strings(df: pd.DataFrame):
     return df
 
 def str_to_float_safe(s):
-    """تبدیل ایمن رشته‌هایی مثل '1,234' یا '-0.1v' یا '7KM' به float.
-       اگر تبدیل نشد، None برمی‌گرداند."""
     if s is None:
         return None
     if isinstance(s, (int, float, np.floating, np.integer)):
@@ -78,14 +76,9 @@ def str_to_float_safe(s):
     s = str(s).strip()
     if s == "" or s.lower() in ["nan", "none", "null"]:
         return None
-    # برداشتن قسمت‌هایی که مشخصاً غیر عددی اند، مثل 'v'، 'KM', 'km', 'm', '+' یا '±' و غیره
-    # اما قبل از حذف علامت منفی/مثبت و ممیز، اعداد با کاما را به نقطه تبدیل کن
     s = s.replace(",", ".")
-    # حذف +/±/+/- و پسوندهای متداول
     s = re.sub(r"[\u00B1±\+\/\-]*\s*\+?/?-?\s*\d+(\.\d+)?", "", s)  # remove trailing ±0.10 or +/-0.10
-    # حذف واحدهای ساده
     s = re.sub(r"(km|KM|m|M|s|S|v|V|mm|MM|sec|SEC)$", "", s).strip()
-    # حالا استخراج اولین عدد اعشاری موجود در رشته
     m = re.search(r"[-+]?\d*\.?\d+", s)
     if m:
         try:
