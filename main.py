@@ -86,3 +86,12 @@ def str_to_float_safe(s):
         except:
             return None
     return None
+
+def col_to_numeric(df: pd.DataFrame, colnames):
+    """ستون(ها) را با str_to_float_safe به عدد تبدیل کند و در صورت خطا np.nan بگذارد."""
+    for col in colnames:
+        if col not in df.columns:
+            continue
+        df[col + "_raw"] = df[col]  # نگه داشتن نسخه خام برای بازرسی
+        df[col] = df[col].apply(str_to_float_safe)
+    return df
