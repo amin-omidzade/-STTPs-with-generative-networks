@@ -16,9 +16,7 @@ import json
 import random
 
 from scipy.optimize import minimize
-from scipy.spatial import cKDTree
-from scipy.special import gammaln
-from scipy.spatial import Delaunay
+from scipy.spatial import cKDTree, gammaln, Delaunay
 
 from sklearn.neighbors import NearestNeighbors
 from sklearn.preprocessing import MinMaxScaler
