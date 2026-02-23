@@ -31,7 +31,7 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, TensorDataset
 
-# in and out path
+# input and output path
 INPUT_PATH = Path("final_data.csv")
 OUTPUT_PATH = Path("final_data_cleaned.csv")
 
