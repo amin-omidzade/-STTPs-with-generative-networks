@@ -13,7 +13,6 @@ import math
 import matplotlib.pyplot as plt
 import json
 import random
-
 from scipy.optimize import minimize
 from scipy.spatial import cKDTree, gammaln, Delaunay
 
