@@ -36,6 +36,7 @@ OUTPUT_PATH = Path("final_data_cleaned.csv")
 mag_col = "MAG"              
 min_magnitude = 4.0          
 
+# Reading csv file function
 def try_read_csv(path: Path):
   # Reading dataset with "tab, comma, whitespace"
     for sep, kwargs in [
