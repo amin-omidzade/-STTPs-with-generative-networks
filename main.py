@@ -129,7 +129,6 @@ def parse_event_time(s):
         return None
 
 def parse_latlon(s):
-    """تبدیل '37 04.44N +/-0.30' یا '29 32.46N' به مقدار اعشاری (مثبت/منفی بر اساس N/S/E/W)."""
     if pd.isna(s):
         return None
     s = str(s).strip()
@@ -150,3 +149,28 @@ def parse_latlon(s):
         except:
             return None
     return None
+
+def parse_depth(s):
+    if pd.isna(s):
+        return None
+    s = str(s).strip()
+    s = s.replace(",", ".")
+    m = re.search(r"(\d+\.?\d*)", s)
+    if m:
+        try:
+            return float(m.group(1))
+        except:
+            return None
+    return None
+
+def extract_first_numeric_from_comma_field(s):
+    if pd.isna(s):
+        return None
+    s = str(s)
+    parts = re.split(r"[,\s]+", s.strip())
+    for p in parts:
+        num = str_to_float_safe(p)
+        if num is not None:
+            return num
+    return None
+
