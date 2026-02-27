@@ -128,3 +128,25 @@ def parse_event_time(s):
     except Exception:
         return None
 
+def parse_latlon(s):
+    """تبدیل '37 04.44N +/-0.30' یا '29 32.46N' به مقدار اعشاری (مثبت/منفی بر اساس N/S/E/W)."""
+    if pd.isna(s):
+        return None
+    s = str(s).strip()
+    s = re.sub(r"\+/-.*", "", s)
+    m = re.search(r"(?P<deg>\d{1,3})\s+?(?P<min>\d{1,2}(?:\.\d+)?)\s*([°']*)\s*(?P<dir>[NSEW])", s, flags=re.IGNORECASE)
+    if m:
+        deg = float(m.group("deg"))
+        minute = float(m.group("min"))
+        direction = m.group("dir").upper()
+        dec = deg + minute / 60.0
+        if direction in ("S", "W"):
+            dec = -dec
+        return dec
+    m2 = re.search(r"[-+]?\d+\.?\d*", s)
+    if m2:
+        try:
+            return float(m2.group(0))
+        except:
+            return None
+    return None
