@@ -90,3 +90,41 @@ def col_to_numeric(df: pd.DataFrame, colnames):
         df[col + "_raw"] = df[col]  
         df[col] = df[col].apply(str_to_float_safe)
     return df
+
+def parse_event_time(s):
+    """
+       '2019Y  6M 21D  0H  0M 16.05S +/-0.10 EASTERN F...'      
+    """
+    if pd.isna(s):
+        return None
+    s = str(s)
+    # year Y, month M, day D, hour H, minute M, second S
+    m = re.search(
+        r"(?P<Y>\d{4})\s*Y.*?(?P<M>\d{1,2})\s*M.*?(?P<D>\d{1,2})\s*D.*?(?P<h>\d{1,2})\s*H.*?(?P<m>\d{1,2})\s*M.*?(?P<s>\d{1,2}(?:\.\d+)?)\s*S",
+        s,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    if not m:
+        nums = re.findall(r"\d{1,4}\.\d+|\d{1,4}", s)
+        if len(nums) >= 6:
+            try:
+                Y, M, D, h, mm, ss = nums[:6]
+                return datetime(
+                    int(Y), int(M), int(D), int(h), int(mm), int(float(ss))
+                )
+            except Exception:
+                return None
+        return None
+    try:
+        Y = int(m.group("Y"))
+        M = int(m.group("M"))
+        D = int(m.group("D"))
+        h = int(m.group("h"))
+        mm = int(m.group("m"))
+        ss = float(m.group("s"))
+        sec = int(ss)
+        micro = int((ss - sec) * 1_000_000)
+        return datetime(Y, M, D, h, mm, sec, micro)
+    except Exception:
+        return None
+
