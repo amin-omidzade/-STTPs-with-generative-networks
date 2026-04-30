@@ -173,4 +173,3 @@ def extract_first_numeric_from_comma_field(s):
         if num is not None:
             return num
     return None
-
